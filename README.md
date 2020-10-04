@@ -1,6 +1,8 @@
 # Pytorch-Android-Mobile-Application
 Android Mobile Application with Pytorch
 
+Our goal is to develop an impressive and useful mobile application with pytorch. Keep following us...
+
 ## OTHER APPLICATION
 
 1- https://github.com/pytorch/android-demo-app
