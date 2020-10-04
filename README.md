@@ -3,6 +3,13 @@ Android Mobile Application with Pytorch
 
 Our goal is to develop an impressive and useful mobile application with pytorch. Keep following us...
 
+
+Download the model and add to the path below.
+
+Model: https://drive.google.com/file/d/1DG3dG4DKPnOQIfTE6RNqpvxp0dAD3CLQ/view?usp=sharing
+
+Path: HelloWorldApp/app/src/main/assets
+
 ## OTHER APPLICATION
 
 1- https://github.com/pytorch/android-demo-app
