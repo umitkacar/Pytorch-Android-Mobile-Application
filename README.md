@@ -4,8 +4,13 @@
 
 <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" />
 <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" />
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
 <img src="https://img.shields.io/badge/Deep_Learning-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" />
 <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" />
+<img src="https://img.shields.io/badge/Hatch-4051B5?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Ruff-D7FF64?style=for-the-badge&logo=ruff&logoColor=black" />
+<img src="https://img.shields.io/badge/MyPy-2A6DB2?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Pytest-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white" />
 
 ### 🚀 State-of-the-art AI Image Classification on Mobile
 
@@ -29,6 +34,7 @@ A cutting-edge Android application demonstrating **real-time AI image classifica
 
 ### ✨ Key Features
 
+#### 📱 Mobile App
 - 🎯 **Real-time Image Classification** - Instant predictions using ImageNet-trained models
 - 🔐 **Privacy-First** - All processing happens on-device, no data leaves your phone
 - ⚡ **Lightning Fast** - Optimized PyTorch Mobile inference
@@ -37,6 +43,17 @@ A cutting-edge Android application demonstrating **real-time AI image classifica
 - 🔋 **Battery Efficient** - Optimized for mobile performance
 - 📦 **Small APK Size** - Efficient model compression
 - 🌐 **Offline Capable** - Works without internet connection
+
+#### 🐍 Python Toolkit (NEW! 2024-2025)
+- 🔨 **Hatch** - Modern Python project manager
+- ⚡ **Ruff** - Ultra-fast linting (replaces flake8, isort, pyupgrade)
+- 🎨 **Black** - Uncompromising code formatter
+- 🔍 **MyPy** - Static type checking
+- 🧪 **Pytest** - Comprehensive testing with >80% coverage
+- 🪝 **Pre-commit** - Automated code quality checks
+- 🚀 **Model Training** - Custom model training pipeline
+- 📦 **Model Export** - TorchScript & ONNX export
+- 🎯 **Quantization** - Model compression for mobile
 
 ## 🎬 Demo
 
@@ -64,12 +81,20 @@ A cutting-edge Android application demonstrating **real-time AI image classifica
 
 ### Prerequisites
 
+#### For Android Development
 - 📱 Android Studio Arctic Fox or newer
 - ☕ JDK 11 or higher
 - 🤖 Android SDK API 21+
 - 🧠 Basic knowledge of Android development
 
-### 📥 Installation
+#### For Python Development (Model Training)
+- 🐍 Python 3.9 or higher
+- 🔥 PyTorch 2.0+
+- 📦 pip or uv package manager
+
+### 📥 Quick Start - Android App
+
+If you just want to run the Android app with a pretrained model:
 
 1. **Clone the repository**
    ```bash
@@ -77,14 +102,21 @@ A cutting-edge Android application demonstrating **real-time AI image classifica
    cd Pytorch-Android-Mobile-Application
    ```
 
-2. **Download the Pre-trained Model**
+2. **Quick Export Pretrained Model** 🚀 (NEW!)
+   ```bash
+   # Install Python dependencies
+   pip install -e ".[dev]"
 
-   📦 [Download model.pt from Google Drive](https://drive.google.com/file/d/1DG3dG4DKPnOQIfTE6RNqpvxp0dAD3CLQ/view?usp=sharing)
+   # Export pretrained model and copy to Android assets
+   make quick-export
+   # OR manually:
+   python -m pytorch_mobile.export --model mobilenet_v2 --output models/model.pt --optimize --quantize
+   cp models/model.pt HelloWorldApp/app/src/main/assets/
+   ```
 
-   📍 **Place the model at:**
-   ```
-   HelloWorldApp/app/src/main/assets/model.pt
-   ```
+   **Alternative:** Download pre-trained model
+   - 📦 [Download model.pt from Google Drive](https://drive.google.com/file/d/1DG3dG4DKPnOQIfTE6RNqpvxp0dAD3CLQ/view?usp=sharing)
+   - 📍 Place at: `HelloWorldApp/app/src/main/assets/model.pt`
 
 3. **Open in Android Studio**
    - Open Android Studio
@@ -97,6 +129,29 @@ A cutting-edge Android application demonstrating **real-time AI image classifica
    - Click Run ▶️ button
    - Grant storage permissions when prompted
    - Select an image and see the magic! ✨
+
+### 🐍 Python Development Setup
+
+For training custom models or contributing to Python code:
+
+```bash
+# Install development dependencies
+pip install -e ".[dev]"
+
+# Install pre-commit hooks
+pre-commit install
+
+# Run all checks
+make dev-check
+
+# Export a model
+make quick-export
+
+# Run tests
+make test-cov
+```
+
+See [python/README.md](python/README.md) for detailed Python documentation.
 
 ## 📖 How It Works
 
