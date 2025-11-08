@@ -97,6 +97,9 @@ include = [
 [tool.hatch.build.targets.wheel]
 packages = ["python/src/pytorch_mobile"]
 
+[tool.hatch.build.targets.wheel.force-include]
+"python/src/pytorch_mobile" = "pytorch_mobile"
+
 [tool.hatch.envs.default]
 dependencies = [
     "pytest>=7.4.0",

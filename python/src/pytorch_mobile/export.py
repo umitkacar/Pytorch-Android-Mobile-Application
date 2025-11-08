@@ -2,7 +2,7 @@
 
 import logging
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import Optional
 
 import torch
 import torch.nn as nn
@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 def export_to_torchscript(
     model: nn.Module,
     output_path: Path,
-    input_size: Tuple[int, int, int, int] = (1, 3, 320, 320),
+    input_size: tuple[int, int, int, int] = (1, 3, 320, 320),
     optimize: bool = True,
     quantize: bool = False,
 ) -> Path:
@@ -78,7 +78,7 @@ def export_to_torchscript(
 def export_onnx(
     model: nn.Module,
     output_path: Path,
-    input_size: Tuple[int, int, int, int] = (1, 3, 320, 320),
+    input_size: tuple[int, int, int, int] = (1, 3, 320, 320),
     opset_version: int = 11,
 ) -> Path:
     """Export PyTorch model to ONNX format.
@@ -167,7 +167,7 @@ def optimize_model(
 
 def benchmark_model(
     model_path: Path,
-    input_size: Tuple[int, int, int, int] = (1, 3, 320, 320),
+    input_size: tuple[int, int, int, int] = (1, 3, 320, 320),
     num_iterations: int = 100,
 ) -> dict[str, float]:
     """Benchmark exported model performance.

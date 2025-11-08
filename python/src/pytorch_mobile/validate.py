@@ -2,7 +2,7 @@
 
 import logging
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import Any, Optional
 
 import torch
 import torch.nn as nn
@@ -71,7 +71,7 @@ def predict(
     model: torch.jit.ScriptModule,
     image_tensor: torch.Tensor,
     top_k: int = 5,
-) -> Tuple[torch.Tensor, torch.Tensor]:
+) -> tuple[torch.Tensor, torch.Tensor]:
     """Run inference on an image tensor.
 
     Args:
@@ -95,7 +95,7 @@ def validate_model(
     image_path: Optional[Path] = None,
     class_names: Optional[list[str]] = None,
     top_k: int = 5,
-) -> dict[str, any]:
+) -> dict[str, Any]:
     """Validate a TorchScript model on an image.
 
     Args:
@@ -166,7 +166,7 @@ def compare_models(
     model_paths: list[Path],
     image_path: Path,
     class_names: Optional[list[str]] = None,
-) -> dict[str, any]:
+) -> dict[str, Any]:
     """Compare multiple models on the same image.
 
     Args:
@@ -190,7 +190,7 @@ def compare_models(
     return results
 
 
-def verify_android_compatibility(model_path: Path) -> dict[str, any]:
+def verify_android_compatibility(model_path: Path) -> dict[str, Any]:
     """Verify that a model is compatible with Android deployment.
 
     Args:
