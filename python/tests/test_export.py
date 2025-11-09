@@ -2,9 +2,9 @@
 
 from pathlib import Path
 
-import pytest
 import torch
-import torch.nn as nn
+
+from torch import nn
 
 from pytorch_mobile.export import (
     benchmark_model,
@@ -16,9 +16,7 @@ from pytorch_mobile.export import (
 class TestExportToTorchScript:
     """Tests for TorchScript export."""
 
-    def test_export_basic_model(
-        self, sample_model: nn.Module, temp_model_dir: Path
-    ) -> None:
+    def test_export_basic_model(self, sample_model: nn.Module, temp_model_dir: Path) -> None:
         """Test basic model export."""
         output_path = temp_model_dir / "model.pt"
         result_path = export_to_torchscript(
@@ -28,9 +26,7 @@ class TestExportToTorchScript:
         assert result_path.exists()
         assert result_path == output_path
 
-    def test_export_with_optimization(
-        self, sample_model: nn.Module, temp_model_dir: Path
-    ) -> None:
+    def test_export_with_optimization(self, sample_model: nn.Module, temp_model_dir: Path) -> None:
         """Test model export with mobile optimization."""
         output_path = temp_model_dir / "model_optimized.pt"
         result_path = export_to_torchscript(
@@ -39,9 +35,7 @@ class TestExportToTorchScript:
 
         assert result_path.exists()
 
-    def test_export_with_quantization(
-        self, sample_model: nn.Module, temp_model_dir: Path
-    ) -> None:
+    def test_export_with_quantization(self, sample_model: nn.Module, temp_model_dir: Path) -> None:
         """Test model export with quantization."""
         output_path = temp_model_dir / "model_quantized.pt"
         result_path = export_to_torchscript(
@@ -50,9 +44,7 @@ class TestExportToTorchScript:
 
         assert result_path.exists()
 
-    def test_export_creates_directory(
-        self, sample_model: nn.Module, temp_model_dir: Path
-    ) -> None:
+    def test_export_creates_directory(self, sample_model: nn.Module, temp_model_dir: Path) -> None:
         """Test that export creates parent directories."""
         output_path = temp_model_dir / "subdir" / "model.pt"
         result_path = export_to_torchscript(sample_model, output_path)
@@ -92,9 +84,7 @@ class TestOptimizeModel:
 class TestBenchmarkModel:
     """Tests for model benchmarking."""
 
-    def test_benchmark_exported_model(
-        self, sample_model: nn.Module, temp_model_dir: Path
-    ) -> None:
+    def test_benchmark_exported_model(self, sample_model: nn.Module, temp_model_dir: Path) -> None:
         """Test benchmarking an exported model."""
         output_path = temp_model_dir / "model.pt"
         export_to_torchscript(sample_model, output_path)

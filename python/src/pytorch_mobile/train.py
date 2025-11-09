@@ -1,12 +1,13 @@
 """Model training module for PyTorch Mobile."""
 
 import logging
+
 from pathlib import Path
-from typing import Any, Optional
+from typing import Optional
 
 import torch
-import torch.nn as nn
-import torch.optim as optim
+
+from torch import nn, optim
 from torch.utils.data import DataLoader
 from torchvision import datasets, models, transforms
 from tqdm import tqdm
@@ -57,7 +58,7 @@ def get_data_transforms() -> dict[str, transforms.Compose]:
     Returns:
         Dictionary with 'train' and 'val' transforms
     """
-    data_transforms = {
+    return {
         "train": transforms.Compose(
             [
                 transforms.RandomResizedCrop(224),
@@ -76,7 +77,6 @@ def get_data_transforms() -> dict[str, transforms.Compose]:
             ]
         ),
     }
-    return data_transforms
 
 
 def train_epoch(

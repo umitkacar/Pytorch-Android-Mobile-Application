@@ -1,11 +1,12 @@
 """Model export module for PyTorch Mobile."""
 
 import logging
+
 from pathlib import Path
-from typing import Optional
 
 import torch
-import torch.nn as nn
+
+from torch import nn
 from torch.utils.mobile_optimizer import optimize_for_mobile
 
 
@@ -157,7 +158,7 @@ def optimize_model(
         # Import pruning utilities
         import torch.nn.utils.prune as prune_utils
 
-        for name, module in model.named_modules():
+        for _name, module in model.named_modules():
             if isinstance(module, (nn.Conv2d, nn.Linear)):
                 prune_utils.l1_unstructured(module, name="weight", amount=pruning_amount)
                 prune_utils.remove(module, "weight")
@@ -242,9 +243,7 @@ def main() -> None:
         help="Output path for exported model",
     )
     parser.add_argument("--num-classes", type=int, default=1000, help="Number of classes")
-    parser.add_argument(
-        "--optimize", action="store_true", default=True, help="Optimize for mobile"
-    )
+    parser.add_argument("--optimize", action="store_true", default=True, help="Optimize for mobile")
     parser.add_argument("--quantize", action="store_true", help="Apply quantization")
     parser.add_argument("--benchmark", action="store_true", help="Benchmark the exported model")
     parser.add_argument("--format", choices=["torchscript", "onnx"], default="torchscript")

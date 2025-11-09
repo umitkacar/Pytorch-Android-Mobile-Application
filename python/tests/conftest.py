@@ -1,16 +1,16 @@
 """Pytest configuration and fixtures."""
 
 from pathlib import Path
-from typing import Generator
 
 import pytest
 import torch
-import torch.nn as nn
+
 from PIL import Image
+from torch import nn
 
 
 @pytest.fixture
-def temp_model_dir(tmp_path: Path) -> Generator[Path, None, None]:
+def temp_model_dir(tmp_path: Path) -> Path:
     """Create a temporary directory for models.
 
     Args:
@@ -21,11 +21,11 @@ def temp_model_dir(tmp_path: Path) -> Generator[Path, None, None]:
     """
     model_dir = tmp_path / "models"
     model_dir.mkdir(exist_ok=True)
-    yield model_dir
+    return model_dir
 
 
 @pytest.fixture
-def temp_data_dir(tmp_path: Path) -> Generator[Path, None, None]:
+def temp_data_dir(tmp_path: Path) -> Path:
     """Create a temporary directory for test data.
 
     Args:
@@ -36,7 +36,7 @@ def temp_data_dir(tmp_path: Path) -> Generator[Path, None, None]:
     """
     data_dir = tmp_path / "data"
     data_dir.mkdir(exist_ok=True)
-    yield data_dir
+    return data_dir
 
 
 @pytest.fixture

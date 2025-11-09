@@ -50,10 +50,13 @@ dev = [
     "pytest-cov>=4.1.0",
     "pytest-xdist>=3.3.0",
     "pytest-asyncio>=0.21.0",
+    "pytest-timeout>=2.2.0",
+    "pytest-mock>=3.12.0",
     "black>=23.7.0",
     "ruff>=0.1.0",
     "mypy>=1.5.0",
     "pre-commit>=3.3.0",
+    "coverage[toml]>=7.3.0",
     "ipython>=8.14.0",
     "ipdb>=0.13.13",
 ]
@@ -111,14 +114,19 @@ dependencies = [
 
 [tool.hatch.envs.default.scripts]
 test = "pytest {args:python/tests}"
-test-cov = "pytest --cov=pytorch_mobile --cov-report=html --cov-report=term {args:python/tests}"
+test-cov = "pytest --cov=python/src/pytorch_mobile --cov-report=html --cov-report=term --cov-report=xml {args:python/tests}"
+test-parallel = "pytest -n auto {args:python/tests}"
+test-fast = "pytest -n auto -m 'not slow' {args:python/tests}"
 lint = "ruff check {args:python/src python/tests}"
 format = "black {args:python/src python/tests}"
+format-check = "black --check {args:python/src python/tests}"
 type-check = "mypy {args:python/src}"
+security = "bandit -r python/src -c pyproject.toml"
 check-all = [
-    "format",
+    "format-check",
     "lint",
     "type-check",
+    "security",
     "test-cov",
 ]
 
@@ -177,16 +185,28 @@ select = [
 ]
 
 ignore = [
-    "E501",   # line too long (handled by black)
-    "B008",   # do not perform function calls in argument defaults
-    "C901",   # too complex
+    "E501",    # line too long (handled by black)
+    "B008",    # do not perform function calls in argument defaults
+    "C901",    # too complex
     "PLR0913", # too many arguments
-    "TRY003", # avoid specifying long messages outside exception class
+    "PLR2004", # magic value comparison
+    "TRY003",  # avoid specifying long messages outside exception class
+    "PLC0415", # import should be at top of file
+    "T201",    # print found
+    "S603",    # subprocess without shell=True
+    "S607",    # partial executable path
+    "G004",    # logging f-string
+    "EM102",   # f-string in exception
+    "EM101",   # raw string in exception
+    "TRY300",  # try-consider-else
+    "TRY400",  # error-instead-of-exception
+    "PLW2901", # redefined-loop-name
 ]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401", "F403"]
-"tests/**/*.py" = ["PLR2004", "S101", "TID252"]
+"python/tests/**/*.py" = ["PLR2004", "S101", "TID252", "ARG001"]
+"tests/**/*.py" = ["PLR2004", "S101", "TID252", "ARG001"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["pytorch_mobile"]
@@ -273,27 +293,35 @@ addopts = [
     "--showlocals",
     "--tb=short",
     "-v",
+    "--cov-report=term-missing",
+    "--cov-branch",
 ]
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
     "integration: marks tests as integration tests",
     "unit: marks tests as unit tests",
     "gpu: marks tests that require GPU",
+    "network: marks tests that require network access",
 ]
 filterwarnings = [
     "error",
     "ignore::UserWarning",
     "ignore::DeprecationWarning",
+    "ignore::FutureWarning",
 ]
+timeout = 300
+xfail_strict = true
 
 # =============================================================================
 # Coverage Configuration
 # =============================================================================
 
 [tool.coverage.run]
-source = ["python/src"]
+source = ["pytorch_mobile"]
+source_pkgs = ["pytorch_mobile"]
 branch = true
 parallel = true
+relative_files = true
 omit = [
     "*/tests/*",
     "*/__pycache__/*",
@@ -305,6 +333,8 @@ omit = [
 precision = 2
 show_missing = true
 skip_covered = false
+skip_empty = true
+sort = "Cover"
 exclude_lines = [
     "pragma: no cover",
     "def __repr__",
@@ -316,7 +346,12 @@ exclude_lines = [
     "if False:",
     "class .*\\bProtocol\\):",
     "@(abc\\.)?abstractmethod",
+    "except ImportError:",
+    "\\.\\.\\.",
 ]
+
+[tool.coverage.paths]
+source = ["python/src/pytorch_mobile"]
 
 [tool.coverage.html]
 directory = "htmlcov"
@@ -330,4 +365,8 @@ output = "coverage.xml"
 
 [tool.bandit]
 exclude_dirs = ["/tests", "/build", "/dist"]
-skips = ["B101", "B601"]
+skips = [
+    "B101",  # assert_used - used in tests
+    "B601",  # paramiko_calls
+    "B614",  # pytorch_load - safe in controlled environment
+]

@@ -14,8 +14,8 @@ from pytorch_mobile.validate import validate_model
 
 
 __all__ = [
-    "train_model",
-    "export_to_torchscript",
-    "validate_model",
     "__version__",
+    "export_to_torchscript",
+    "train_model",
+    "validate_model",
 ]

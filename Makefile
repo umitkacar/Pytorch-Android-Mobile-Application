@@ -73,13 +73,17 @@ test: ## Run tests
 	@echo '$(BLUE)Running tests...$(NC)'
 	pytest python/tests -v
 
+test-parallel: ## Run tests in parallel with pytest-xdist
+	@echo '$(BLUE)Running tests in parallel...$(NC)'
+	pytest python/tests -n auto -v
+
 test-cov: ## Run tests with coverage
 	@echo '$(BLUE)Running tests with coverage...$(NC)'
-	pytest python/tests --cov=python/src/pytorch_mobile --cov-report=html --cov-report=term --cov-report=xml -v
+	pytest python/tests --cov=pytorch_mobile --cov-report=html --cov-report=term --cov-report=xml -v
 
 test-fast: ## Run tests without slow tests
 	@echo '$(BLUE)Running fast tests...$(NC)'
-	pytest python/tests -v -m "not slow"
+	pytest python/tests -n auto -v -m "not slow"
 
 test-watch: ## Run tests in watch mode
 	@echo '$(BLUE)Running tests in watch mode...$(NC)'

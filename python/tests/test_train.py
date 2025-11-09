@@ -1,9 +1,8 @@
 """Tests for training module."""
 
-from pathlib import Path
-
 import pytest
-import torch.nn as nn
+
+from torch import nn
 
 from pytorch_mobile.train import create_model, get_data_transforms
 

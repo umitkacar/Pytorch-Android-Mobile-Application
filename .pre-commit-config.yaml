@@ -87,12 +87,36 @@ repos:
         args: [-v, --fail-under=80, --ignore-init-module, --ignore-init-method]
         exclude: ^(tests|docs)/
 
-  # Check for common security issues
+  # Check for common security issues (dependencies)
   - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
     rev: v1.3.3
     hooks:
       - id: python-safety-dependencies-check
         files: pyproject.toml
+
+  # Pytest checks
+  - repo: local
+    hooks:
+      - id: pytest-check
+        name: pytest-check
+        entry: python3 -m pytest
+        language: system
+        pass_filenames: false
+        always_run: true
+        args: [python/tests, -v, --tb=short, -m, "not slow"]
+        stages: [push]
+
+  # Coverage check
+  - repo: local
+    hooks:
+      - id: coverage-check
+        name: coverage-check
+        entry: python3 -m pytest
+        language: system
+        pass_filenames: false
+        always_run: true
+        args: [python/tests, --cov=python/src/pytorch_mobile, --cov-fail-under=80, --tb=short, -m, "not slow"]
+        stages: [push]
 
   # Upgrade Python syntax
   - repo: https://github.com/asottile/pyupgrade

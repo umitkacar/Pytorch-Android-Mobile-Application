@@ -81,9 +81,7 @@ class TestPredict:
 class TestValidateModel:
     """Tests for model validation."""
 
-    def test_validate_model_without_image(
-        self, sample_model, temp_model_dir: Path
-    ) -> None:
+    def test_validate_model_without_image(self, sample_model, temp_model_dir: Path) -> None:
         """Test validating model without test image."""
         model_path = temp_model_dir / "model.pt"
         export_to_torchscript(sample_model, model_path)

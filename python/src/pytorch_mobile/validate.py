@@ -1,11 +1,12 @@
 """Model validation module for PyTorch Mobile."""
 
 import logging
+
 from pathlib import Path
 from typing import Any, Optional
 
 import torch
-import torch.nn as nn
+
 from PIL import Image
 from torchvision import transforms
 
@@ -179,7 +180,7 @@ def compare_models(
     """
     logger.info(f"Comparing {len(model_paths)} models")
 
-    image_tensor = preprocess_image(image_path)
+    preprocess_image(image_path)
     results = {"image_path": str(image_path), "models": []}
 
     for model_path in model_paths:
