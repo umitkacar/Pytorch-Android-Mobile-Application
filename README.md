@@ -1,16 +1,18 @@
 <div align="center">
 
-# 🔥 PyTorch Android Mobile Application
+# 📱 ExecuTorch Android Inference
+### *Production Android AI with PyTorch Mobile - 50KB Footprint & NPU Acceleration*
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=6366F1&center=true&vCenter=true&multiline=true&width=900&lines=On-Device+AI+Inference+%F0%9F%93%B1;ExecuTorch+1.0+%2B+PyTorch+Mobile+%E2%9A%A1;Privacy-First+Edge+Deployment+%F0%9F%94%92" alt="Typing SVG" />
+
+[![Stars](https://img.shields.io/github/stars/umitkacar/executorch-android-inference?style=for-the-badge&logo=github&color=yellow)](https://github.com/umitkacar/executorch-android-inference/stargazers)
+[![Forks](https://img.shields.io/github/forks/umitkacar/executorch-android-inference?style=for-the-badge&logo=github)](https://github.com/umitkacar/executorch-android-inference/network)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
 <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" />
 <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" />
-<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
-<img src="https://img.shields.io/badge/Deep_Learning-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" />
+<img src="https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white" />
 <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" />
-<img src="https://img.shields.io/badge/Hatch-4051B5?style=for-the-badge" />
-<img src="https://img.shields.io/badge/Ruff-D7FF64?style=for-the-badge&logo=ruff&logoColor=black" />
-<img src="https://img.shields.io/badge/MyPy-2A6DB2?style=for-the-badge" />
-<img src="https://img.shields.io/badge/Pytest-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white" />
 
 ### 🚀 State-of-the-art AI Image Classification on Mobile
 
